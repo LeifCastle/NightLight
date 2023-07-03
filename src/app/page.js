@@ -7,6 +7,8 @@ export default function Home() {
   return (
     <main className="">
       <div>
+        <Link href="/quick_record">Quick Record</Link>
+        <br />
         <Link href="/journal">Journal</Link>
         <br />
         <Link href="/connect">Connect</Link>

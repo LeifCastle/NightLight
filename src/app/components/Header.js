@@ -8,14 +8,13 @@ export default function Header() {
   let Home;
   if (pathname != "/") {
     Home = <Link href="/">Home</Link>;
-    console.log(pathname);
   }
 
   return (
     <div className="flex justify-evenly items-center w-screen h-[8%] bg-Dark2 text-slate-300 rounded-bl-lg rounded-br-lg">
-      <div>{Home}</div>
-      <h1 className="text-4xl">Night Light</h1>
-      <div>
+      <div className="basis-33%">{Home}</div>
+      <h1 className="basis-33% text-4xl">Night Light</h1>
+      <div className="basis-33%">
         <button>Login</button>
       </div>
     </div>
