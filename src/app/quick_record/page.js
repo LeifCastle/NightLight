@@ -29,6 +29,9 @@ export default function Quick_Record() {
 
   //----When user creates a new dream:
   function handleNewDreamHeader() {
+    if (dreamHeaders.length === 9) {
+      return; //Max dreams is 9
+    }
     setDreamHeaders([
       ...dreamHeaders,
       <DreamHeader
@@ -49,7 +52,7 @@ export default function Quick_Record() {
   //----When users deletes a dream:
   function handleDeleteDreamHeader() {
     if (dreamHeaders.length === 1) {
-      return;
+      return; //Prevents user from deleting all dreams
     }
     //Deletes current dream and compoennt
     let newDreamHeaders = [];
@@ -99,47 +102,62 @@ export default function Quick_Record() {
 
   return (
     <>
-      <div className="h-12 bg-stone-500 flex items-center justify-center">
-        <div className="basis-1/3"></div>
-        <div className="basis-1/3 text-center">
-          <HeaderBgContext.Provider value={view_index}>
-            {dreamHeaders.map((dreamHeader, index) => (
-              <DreamHeader
-                key={dreamHeader.key}
-                real_index={dreamHeader.key}
-                display_index={index + 1}
-                changeDream={changeDream}
-              />
-            ))}
-          </HeaderBgContext.Provider>
+      <div className="flex justify-evenly text-black">
+        <div id="dreams" className="flex-col">
+          <div className="h-8 flex w-dreamW mt-4 rounded-t-md bg-pageHeader ">
+            <div className="basis-1/3 ml-3 flex grow justify-left">
+              <HeaderBgContext.Provider value={view_index}>
+                {dreamHeaders.map((dreamHeader, index) => (
+                  <DreamHeader
+                    key={dreamHeader.key}
+                    real_index={dreamHeader.key}
+                    display_index={index + 1}
+                    changeDream={changeDream}
+                  />
+                ))}
+              </HeaderBgContext.Provider>
+            </div>
+            <div className="flex basis-1/3 justify-center mr-4">
+              <button
+                className="mr-2 rounded-md p-1 text-black bg-qrButtonActive"
+                onClick={handleDeleteDreamHeader}
+              >
+                Delete
+              </button>
+              <button
+                className="bg-qrButtonActive text-black p-1 rounded-md"
+                onClick={handleNewDreamHeader}
+              >
+                New
+              </button>
+            </div>
+          </div>
+          <textarea
+            className="text-black w-dreamW h-dreamH rounded-b-md bg-textInput"
+            name="textarea"
+            placeholder="My dream..."
+            ref={dreamInput}
+            onChange={handleNewDream}
+          ></textarea>
         </div>
-        <div className="flex basis-1/3 justify-end mr-4">
-          <button className="mr-2" onClick={handleDeleteDreamHeader}>
-            Delete
-          </button>
-          <button onClick={handleNewDreamHeader}>New</button>
+        <div id="notes" className="flex-col items-center mt-4">
+          <div className="h-8 w-noteW bg-pageHeader rounded-t-md text-center">{`Dream ${selected_display} Notes:`}</div>
+          <div className="flex">
+            <textarea
+              className="text-black w-noteW h-noteH rounded-b-md bg-textInput"
+              name="textarea"
+              placeholder="My note..."
+              ref={noteInput}
+              onChange={handleNewNote}
+            ></textarea>
+          </div>
         </div>
       </div>
-      <div className="text-black">
-        <textarea
-          name="textarea"
-          rows="10"
-          cols="50"
-          placeholder="My dream..."
-          ref={dreamInput}
-          onChange={handleNewDream}
-        ></textarea>
+      <div className="w-screen flex justify-center">
+        <button className="w-saveW h-saveH mt-5 rounded-md text-black bg-slate-600">
+          Save Quick Record
+        </button>
       </div>
-      <div className="h-12">{`Dream ${selected_display} notes`}</div>
-      <textarea
-        className="text-black"
-        name="textarea"
-        rows="10"
-        cols="50"
-        placeholder="My note..."
-        ref={noteInput}
-        onChange={handleNewNote}
-      ></textarea>
     </>
   );
 }

@@ -9,14 +9,14 @@ export default function DreamHeader({
   const currentDreamIndex = useContext(HeaderBgContext);
   let background;
   if (currentDreamIndex === parseInt(real_index)) {
-    background = "bg-lime-600";
+    background = "bg-qrButtonActive";
   } else {
-    background = "bg-slate-500";
+    background = "bg-qrButton";
   }
   return (
     <button
       real_index={real_index}
-      className={`mr-2 ${background}`}
+      className={`mr-2 ${background} rounded-md p-1 h-8`}
       onClick={changeDream}
       display_index={display_index}
     >

@@ -25,3 +25,16 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+textarea::placeholder {
+  color: black;
+}
+textarea {
+  outline: none;
+  border: none;
+  caret-color: black;
+}
+
+#notes {
+  display: flex;
+}
