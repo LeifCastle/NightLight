@@ -13,12 +13,12 @@ export default function DreamHeader({
   } else {
     background = "bg-slate-500";
   }
-  console.log("-----------------------------Rebuild-------------------------");
   return (
     <button
       real_index={real_index}
       className={`mr-2 ${background}`}
       onClick={changeDream}
+      display_index={display_index}
     >
       Dream {display_index}
     </button>
