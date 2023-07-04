@@ -13,8 +13,8 @@ export default function Quick_Record() {
   const dreams = useRef({}); //Records all dreams
 
   //----States
-  const [assignedRealIndex, setAssignedRealIndex] = useState(1); //Assigns sequential real_index with no regard to deleted indices
-  const [view_index, setview_index] = useState(1); //Current real_index of the dream user is viewing
+  const [assignedRealIndex, setAssignedRealIndex] = useState(1);
+  const [view_index, setview_index] = useState(1); //Current index of dream user has selected
   //Array of dream header elements (corresponds to dream entries)
   const [dreamHeaders, setDreamHeaders] = useState([
     <DreamHeader key={1} real_index={1} changeDream={changeDream} />,
@@ -42,35 +42,44 @@ export default function Quick_Record() {
 
   //----When users deletes a dream:
   function handleDeleteDreamHeader() {
-    //Deletes current dream and compoennt
-    let newDreamHeaders = [];
-    dreamHeaders.forEach((component) => {
-      if (component.key != view_index) {
-        newDreamHeaders.push(component);
+    let newshit = [];
+    dreamHeaders.forEach((element) => {
+      if (element.key != view_index) {
+        newshit.push(element);
       }
     });
     delete dreams[`Dream${view_index}`];
-    setDreamHeaders(newDreamHeaders);
-    //Gets last dream component in dreamHeaders to access it's real_index
-    let lastDream = newDreamHeaders[newDreamHeaders.length - 1];
-    //Sets text input area to stored/empty value
-    dreamInput.current.value =
-      dreams[`Dream${lastDream.props.real_index}`] ?? "";
-    setview_index(lastDream.props.real_index);
+    /////////////////////////////////////////////////////////////Kinda relies on this but i can't messe indexs up
+    setDreamHeaders(newshit);
+    setview_index(newshit.length);
+    let lastDream = dreamHeaders[newshit.length - 1];
+    dreamInput.current.value = dreams[`Dream${lastDream.key}`];
+    console.log("Last Dream: ", lastDream);
+  }
+
+  //----On user changes dream text:
+  function handleNewText(event) {
+    dreams[`Dream${view_index}`] = event.target.value;
   }
 
   //----When user switches between dream tabs:
   function changeDream(event) {
-    //Sets text input area to stored/empty value
-    dreamInput.current.value =
-      dreams[`Dream${event.target.getAttribute("real_index")}`] ?? "";
-    setview_index(parseInt(event.target.getAttribute("real_index")));
+    //Sets text in text area from selected dream
+    if (
+      dreams[`Dream${event.target.getAttribute("real_index")}`] !== undefined
+    ) {
+      dreamInput.current.value =
+        dreams[`Dream${event.target.getAttribute("real_index")}`];
+    } else {
+      dreamInput.current.value = "";
+    }
+    setview_index(parseInt(event.target.getAttribute("real-index")));
+    console.log("Dreams: ", dreams);
+    console.log("Real Index: ", event.target.getAttribute("real_index"));
   }
-
-  //----On user change dream text:
-  function handleNewText(event) {
-    dreams[`Dream${view_index}`] = event.target.value;
-  }
+  console.log("Elements: ", dreamHeaders);
+  console.log("Dreams: ", dreams);
+  console.log("ViewIndex", view_index);
 
   //
   //---------------Returned Component--------------\\

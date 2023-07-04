@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const HeaderBgContext = createContext("bg-slate-700");
+export const HeaderBgContext = createContext(1);

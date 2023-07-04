@@ -1,0 +1,101 @@
+"use client";
+import DreamHeader from "../components/DreamHeader";
+import { useState, useRef } from "react";
+import { HeaderBgContext } from "../contexts";
+import { CLIENT_STATIC_FILES_PATH } from "next/dist/shared/lib/constants";
+
+export default function Quick_Record() {
+  //
+  //---------------Variables--------------\\
+  //
+
+  //----Refs
+  const dreamInput = useRef(null); //Text area where dreams are written
+  const dreams = useRef({}); //Records all dreams
+
+  //----States
+  const [assignDreamIndex, setAssignDreamIndex] = useState(1); //Assigns dream entries sequential indices (keys)
+  const [currentDreamIndex, setCurrentDreamIndex] = useState(1); //Current index of dream user has selected
+  //Array of dream header elements (corresponds to dream entries)
+  const [dreamHeaders, setDreamHeaders] = useState(1);
+
+  //
+  //---------------Functions--------------\\
+  //
+
+  //----When user creates a new dream:
+  function handleNewDreamHeader() {
+    setDreamHeaders(dreamHeaders + 1);
+    dreams[`Dream${currentDreamIndex}`] = dreamInput.current.value; //Updates dream entry to be text area input value
+    dreamInput.current.value = ""; //Resets the text area
+    setAssignDreamIndex(assignDreamIndex + 1);
+    setCurrentDreamIndex(assignDreamIndex + 1);
+  }
+
+  //----When users deletes a dream:
+  function handleDeleteDreamHeader() {
+    delete dreams[`Dream${currentDreamIndex}`];
+    console.log("index", currentDreamIndex);
+    console.log(dreams);
+    setCurrentDreamIndex(dreamHeaders - 1);
+    setDreamHeaders(dreamHeaders - 1);
+    setAssignDreamIndex(assignDreamIndex - 1);
+  }
+
+  //----On user changes dream text:
+  function handleNewText(event) {
+    dreams[`Dream${currentDreamIndex}`] = event.target.value;
+  }
+
+  //----When user switches between dream tabs:
+  function changeDream(event) {
+    //Sets text in text area from selected dream
+    if (dreams[`Dream${event.target.id}`] !== undefined) {
+      dreamInput.current.value = dreams[`Dream${event.target.id}`];
+    } else {
+      dreamInput.current.value = "";
+    }
+    setCurrentDreamIndex(parseInt(event.target.id));
+  }
+
+  let clist = [];
+  createList();
+  function createList() {
+    for (let i = 1; i <= dreamHeaders; i++) {
+      clist.push(<DreamHeader key={i} index={i} changeDream={changeDream} />);
+    }
+  }
+  console.log("s", dreams);
+  //
+  //---------------Returned Component--------------\\
+  //
+
+  return (
+    <>
+      <div className="h-12 bg-stone-500 flex items-center justify-center">
+        <div className="basis-1/3"></div>
+        <div className="basis-1/3 text-center">
+          <HeaderBgContext.Provider value={currentDreamIndex}>
+            {clist}
+          </HeaderBgContext.Provider>
+        </div>
+        <div className="flex basis-1/3 justify-end mr-4">
+          <button className="mr-2" onClick={handleDeleteDreamHeader}>
+            Delete
+          </button>
+          <button onClick={handleNewDreamHeader}>New</button>
+        </div>
+      </div>
+      <div className="text-black">
+        <textarea
+          name="textarea"
+          rows="10"
+          cols="50"
+          placeholder="My dream..."
+          ref={dreamInput}
+          onChange={handleNewText}
+        ></textarea>
+      </div>
+    </>
+  );
+}
