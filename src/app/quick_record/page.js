@@ -100,12 +100,15 @@ export default function Quick_Record() {
   let deleteButton;
   if (dreamHeaders.length > 1) {
     deleteButton = (
-      <button
-        className="mr-2 ml-4 rounded-md p-1 bg-qrButtonActive"
-        onClick={handleDeleteDreamHeader}
-      >
-        Delete
-      </button>
+      <>
+        <button
+          className="rounded-md bg-qrButton text-qrButtonTextActive"
+          onClick={handleDeleteDreamHeader}
+        >
+          Delete
+        </button>
+        <div className="text-white ml-3 mr-3 mt-0.5"> | </div>
+      </>
     );
   }
 
@@ -118,7 +121,7 @@ export default function Quick_Record() {
       <div className="flex justify-evenly text-rText">
         <div id="dreams" className="flex-col">
           <div className="h-8 flex w-dreamW mt-4 rounded-t-md bg-qrHeader ">
-            <div className="basis-1/3 ml-3 text-ott flex grow justify-left">
+            <div className="basis-5/6 ml-3 text-ott flex grow justify-left">
               <HeaderBgContext.Provider value={view_index}>
                 {dreamHeaders.map((dreamHeader, index) => (
                   <DreamHeader
@@ -130,17 +133,14 @@ export default function Quick_Record() {
                 ))}
               </HeaderBgContext.Provider>
             </div>
-            <div className="flex basis-1/3 mr-4">
-              <div className="basis-1/2"></div>
-              <div className="basis-1/4">{deleteButton}</div>
-              <div className="basis-1/4 flex justify-left">
-                <button
-                  className="bg-qrButtonActive p-1 rounded-md"
-                  onClick={handleNewDreamHeader}
-                >
-                  New
-                </button>
-              </div>
+            <div className="flex basis-1/6 justify-center bg-qrButton">
+              {deleteButton}
+              <button
+                className="bg-qrButton  text-qrButtonTextActive rounded-md"
+                onClick={handleNewDreamHeader}
+              >
+                New
+              </button>
             </div>
           </div>
           <textarea
@@ -165,7 +165,7 @@ export default function Quick_Record() {
         </div>
       </div>
       <div className="w-screen flex justify-center">
-        <button className="w-saveW h-saveH mt-5 rounded-md bg-recordSave border-2 border-qSBorder text-headerBorder">
+        <button className="w-saveW h-saveH mt-5 rounded-md bg-recordSave text-headerBorder">
           Save Quick Record
         </button>
       </div>

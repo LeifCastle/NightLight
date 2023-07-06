@@ -12,11 +12,11 @@ export default function DreamHeader({
   let br;
   if (currentDreamIndex === parseInt(real_index)) {
     background = "bg-qrButtonActive";
-    text = "text-selectT";
+    text = "text-qrButtonTextActive";
     br = "";
   } else {
     background = "bg-qrButton";
-    text = "tect-ott";
+    text = "text-qrButtonText";
     br = "rounded-b-md";
   }
   return (
