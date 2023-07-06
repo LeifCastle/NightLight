@@ -12,7 +12,7 @@ export default function Quick_Record() {
   const dreamInput = useRef(null); //Text area where dreams are written
   const noteInput = useRef(null); //Text area where notes are written
   const dreams = useRef({}); //Records all dreams
-  const notes = useRef({});
+  const notes = useRef({}); //Records all notes
 
   //----States
   const [assignedRealIndex, setAssignedRealIndex] = useState(1); //Assigns sequential real_index with no regard to deleted indices
@@ -29,8 +29,8 @@ export default function Quick_Record() {
 
   //----When user creates a new dream:
   function handleNewDreamHeader() {
-    if (dreamHeaders.length === 9) {
-      return; //Max dreams is 9
+    if (dreamHeaders.length === 8) {
+      return; //Max dreams is 8
     }
     setDreamHeaders([
       ...dreamHeaders,
@@ -96,16 +96,29 @@ export default function Quick_Record() {
     notes[`Dream${view_index}`] = event.target.value;
   }
 
+  //----Determines if delete button is shown
+  let deleteButton;
+  if (dreamHeaders.length > 1) {
+    deleteButton = (
+      <button
+        className="mr-2 ml-4 rounded-md p-1 bg-qrButtonActive"
+        onClick={handleDeleteDreamHeader}
+      >
+        Delete
+      </button>
+    );
+  }
+
   //
   //---------------Returned Component--------------\\
   //
 
   return (
     <>
-      <div className="flex justify-evenly text-black">
+      <div className="flex justify-evenly text-rText">
         <div id="dreams" className="flex-col">
-          <div className="h-8 flex w-dreamW mt-4 rounded-t-md bg-pageHeader ">
-            <div className="basis-1/3 ml-3 flex grow justify-left">
+          <div className="h-8 flex w-dreamW mt-4 rounded-t-md bg-qrHeader ">
+            <div className="basis-1/3 ml-3 text-ott flex grow justify-left">
               <HeaderBgContext.Provider value={view_index}>
                 {dreamHeaders.map((dreamHeader, index) => (
                   <DreamHeader
@@ -117,23 +130,21 @@ export default function Quick_Record() {
                 ))}
               </HeaderBgContext.Provider>
             </div>
-            <div className="flex basis-1/3 justify-center mr-4">
-              <button
-                className="mr-2 rounded-md p-1 text-black bg-qrButtonActive"
-                onClick={handleDeleteDreamHeader}
-              >
-                Delete
-              </button>
-              <button
-                className="bg-qrButtonActive text-black p-1 rounded-md"
-                onClick={handleNewDreamHeader}
-              >
-                New
-              </button>
+            <div className="flex basis-1/3 mr-4">
+              <div className="basis-1/2"></div>
+              <div className="basis-1/4">{deleteButton}</div>
+              <div className="basis-1/4 flex justify-left">
+                <button
+                  className="bg-qrButtonActive p-1 rounded-md"
+                  onClick={handleNewDreamHeader}
+                >
+                  New
+                </button>
+              </div>
             </div>
           </div>
           <textarea
-            className="text-black w-dreamW h-dreamH rounded-b-md bg-textInput"
+            className="text-ttt w-dreamW h-dreamH rounded-b-md bg-textInput"
             name="textarea"
             placeholder="My dream..."
             ref={dreamInput}
@@ -141,10 +152,10 @@ export default function Quick_Record() {
           ></textarea>
         </div>
         <div id="notes" className="flex-col items-center mt-4">
-          <div className="h-8 w-noteW bg-pageHeader rounded-t-md text-center">{`Dream ${selected_display} Notes:`}</div>
+          <div className="h-8 w-noteW bg-noteHeader text-noteText rounded-t-md text-center">{`Dream ${selected_display} Notes:`}</div>
           <div className="flex">
             <textarea
-              className="text-black w-noteW h-noteH rounded-b-md bg-textInput"
+              className="text-ttt w-noteW h-noteH rounded-b-md bg-textInput"
               name="textarea"
               placeholder="My note..."
               ref={noteInput}
@@ -154,7 +165,7 @@ export default function Quick_Record() {
         </div>
       </div>
       <div className="w-screen flex justify-center">
-        <button className="w-saveW h-saveH mt-5 rounded-md text-black bg-slate-600">
+        <button className="w-saveW h-saveH mt-5 rounded-md bg-recordSave border-2 border-qSBorder text-headerBorder">
           Save Quick Record
         </button>
       </div>

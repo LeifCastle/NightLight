@@ -8,12 +8,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        pageHeader: "#062925",
-        pageHeaderButton: "#044A42",
-        qrHeader: "#2A474B",
-        qrButton: "#044A42",
-        qrButtonActive: "#867B69",
-        textInput: "#466561", //#737675
+        appBg: "#000000",
+        pageHeader: "#010E0F",
+        pageHeaderButton: "#1E352C",
+        qrHeader: "#101701",
+        qrButton: "#262C1B",
+        qrButtonActive: "#485236",
+        noteHeader: "#262C1B",
+        recordSave: "#010E0F",
+        textInput: "#414A44",
+        headerText: "#5D6660",
+        headerBText: "#5D6660",
+        headerBorder: "#5D6660",
+        qSBorder: "#343B36",
+        rText: "#040404",
+        ttt: "#B5B5B5",
+        noteText: "#9A9A9A",
+        ott: "#828282",
+        selectT: "#000000",
       },
       spacing: {
         noteH: "70vh",

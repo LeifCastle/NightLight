@@ -11,13 +11,17 @@ export default function Header() {
   }
 
   return (
-    <div className="flex justify-center items-center w-screen h-[8%] text-slate-400 bg-pageHeader text-center rounded-bl-lg rounded-br-lg">
+    <div className="flex justify-center items-center w-screen h-[8%] text-headerText bg-pageHeader text-center rounded-bl-lg rounded-br-lg">
       <div className="basis-1/3 flex justify-center">
-        <div className="w-20 bg-pageHeaderButton rounded-md">{Home}</div>
+        <div className="w-20 bg-inherit border-2 border-headerBorder text-headerBText rounded-md">
+          {Home}
+        </div>
       </div>
-      <h1 className="basis-1/3 text-4xl">Night Light</h1>
+      <h1 className="basis-1/3 font-md font-sans text-4xl">Night Light</h1>
       <div className="basis-1/3">
-        <button className="bg-pageHeaderButton rounded-md">Login</button>
+        <button className="bg-pageHeader pl-2 pr-2 border-2 border-headerBorder text-headerBText rounded-md">
+          Login
+        </button>
       </div>
     </div>
   );
