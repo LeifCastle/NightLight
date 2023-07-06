@@ -133,7 +133,7 @@ export default function Quick_Record() {
                 ))}
               </HeaderBgContext.Provider>
             </div>
-            <div className="flex basis-1/6 justify-center bg-qrButton">
+            <div className="flex basis-1/6 justify-center bg-qrButton rounded-t-md rounded-l-md">
               {deleteButton}
               <button
                 className="bg-qrButton  text-qrButtonTextActive rounded-md"
@@ -144,7 +144,7 @@ export default function Quick_Record() {
             </div>
           </div>
           <textarea
-            className="text-ttt w-dreamW h-dreamH rounded-b-md bg-textInput"
+            className="pl-4 pt-2 pr-4 pb-2 w-dreamW h-dreamH rounded-b-md bg-textInput"
             name="textarea"
             placeholder="My dream..."
             ref={dreamInput}
@@ -155,7 +155,7 @@ export default function Quick_Record() {
           <div className="h-8 w-noteW bg-noteHeader text-noteText rounded-t-md text-center">{`Dream ${selected_display} Notes:`}</div>
           <div className="flex">
             <textarea
-              className="text-ttt w-noteW h-noteH rounded-b-md bg-textInput"
+              className="pl-4 pt-2 pr-4 pb-2 w-noteW h-noteH rounded-b-md bg-textInput"
               name="textarea"
               placeholder="My note..."
               ref={noteInput}

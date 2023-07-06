@@ -12,7 +12,7 @@ textarea {
   color: #cbcbcb;
 }
 
-#notes {
+.flex-col {
   display: flex;
 }
 

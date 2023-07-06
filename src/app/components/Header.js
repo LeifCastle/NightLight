@@ -6,8 +6,26 @@ import Link from "next/link";
 export default function Header() {
   const pathname = usePathname();
   let Home;
+  let loginCreate;
+  let create = (
+    <button className="bg-pageHeader pl-2 pr-2 border-2 border-headerBorder text-headerBText rounded-md">
+      Create Account
+    </button>
+  );
+  let login = (
+    <button className="bg-pageHeader pl-2 pr-2 border-2 border-headerBorder text-headerBText rounded-md">
+      Login
+    </button>
+  );
+  let loggedIn = false;
   if (pathname != "/") {
     Home = <Link href="/">Home</Link>;
+  }
+
+  if (loggedIn) {
+    loginCreate = <Link href="/account/login">{login}</Link>;
+  } else {
+    loginCreate = <Link href="/account/create">{create}</Link>;
   }
 
   return (
@@ -18,11 +36,7 @@ export default function Header() {
         </div>
       </div>
       <h1 className="basis-1/3 font-md font-sans text-4xl">Night Light</h1>
-      <div className="basis-1/3">
-        <button className="bg-pageHeader pl-2 pr-2 border-2 border-headerBorder text-headerBText rounded-md">
-          Login
-        </button>
-      </div>
+      <div className="basis-1/3">{loginCreate}</div>
     </div>
   );
 }

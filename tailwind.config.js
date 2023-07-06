@@ -8,25 +8,29 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        //Backgrounds
         appBg: "#313338",
-        pageHeader: "#111214", //Discord 2B2D31  active:404249
+        pageHeader: "#111214",
         pageHeaderButton: "#1E352C",
-        line: "#1E1F22",
-        qrHeader: "#1E1F22",
-        qrButton: "#2B2D31",
-        qrButtonActive: "#404249",
+        qrHeader: "#1E1F22", //Rename to headerPrimary
+        textInput: "#414A44",
         noteHeader: "#1E1F22",
         recordSave: "#1E1F22",
-        textInput: "#414A44",
+
+        //Buttons
+        qrButton: "#2B2D31",
+        qrButtonActive: "#404249",
+
+        //Text
         headerText: "#EDEDED",
         headerBText: "#EDEDED",
-        headerBorder: "#EDEDED",
-        qSBorder: "#343B36",
-        rText: "#040404",
-        qrButtonTextActive: "#FFFFFF",
         noteText: "#9A9A9A",
         qrButtonText: "#828282",
-        selectT: "#000000",
+        qrButtonTextActive: "#FFFFFF",
+
+        //Border
+        headerBorder: "#EDEDED",
+        qSBorder: "#343B36",
       },
       spacing: {
         noteH: "70vh",
